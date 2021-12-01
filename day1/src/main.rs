@@ -1,25 +1,26 @@
 //use std::env;
-#![allow(unused_assignments)]
-#![allow(unused_mut)]
-#![allow(unused_variables)]
+use dhat::{Dhat, DhatAlloc};
 use std::fs;
 
+#[global_allocator]
+static ALLOCATOR: DhatAlloc = DhatAlloc;
 fn main() {
-    let mut first: u32;
-    let mut second: u32;
-    let mut third: u32;
-    let mut fourth: u32;
-    let mut previous: u32;
-    let mut current: u32;
+    let _dhat = Dhat::start_heap_profiling();
+    let first: u16;
+    let mut second: u16;
+    let mut third: u16;
+    let mut fourth: u16;
+    let mut previous: u16;
+    let mut current: u16;
     let mut total_increased: u16 = 0;
 
     let input =
         fs::read_to_string("input.txt").expect("Something went wrong reading the input file");
     let mut lines = input.lines().peekable();
-    first = lines.next().unwrap().parse::<u32>().unwrap();
-    second = lines.next().unwrap().parse::<u32>().unwrap();
-    third = lines.next().unwrap().parse::<u32>().unwrap();
-    fourth = lines.next().unwrap().parse::<u32>().unwrap();
+    first = lines.next().unwrap().parse::<u16>().unwrap();
+    second = lines.next().unwrap().parse::<u16>().unwrap();
+    third = lines.next().unwrap().parse::<u16>().unwrap();
+    fourth = lines.next().unwrap().parse::<u16>().unwrap();
     previous = first + second + third;
     current = second + third + fourth;
     if current > previous {
@@ -27,10 +28,9 @@ fn main() {
     }
     while lines.peek() != None {
         previous = current;
-        first = second;
         second = third;
         third = fourth;
-        fourth = lines.next().unwrap().parse::<u32>().unwrap();
+        fourth = lines.next().unwrap().parse::<u16>().unwrap();
         current = second + third + fourth;
         if current > previous {
             total_increased = total_increased + 1;
