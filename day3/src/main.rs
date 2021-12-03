@@ -1,6 +1,7 @@
 use std::fs;
 
-fn main() {
+#[allow(dead_code)]
+fn part1() {
     //this will read in the file as bytes and convert them into decimal which is fine
     let mut gamma = 0;
     let mut epsilon = 0;
@@ -46,4 +47,113 @@ fn main() {
         "gamma: {:b}, epsilon: {:b}, result: {}",
         gamma, epsilon, result
     )
+}
+
+fn part2() {
+    //this will read in the file as bytes and convert them into decimal which is fine
+    let input = fs::read_to_string("input.txt").unwrap();
+    let bytes: Vec<u16> = input
+        .lines()
+        .map(|line| u16::from_str_radix(line, 2).unwrap())
+        .collect::<Vec<u16>>();
+    let mut oxygen = bytes.clone();
+    let mut oxygen_result: Vec<u16> = vec![];
+    let mut co2 = bytes.clone();
+    let mut co2_result: Vec<u16> = vec![];
+    while oxygen.len() > 1 {
+        let mut i = 16;
+        while i > 0 {
+            let mut count0 = 0;
+            let mut count1 = 0;
+            for bit in &oxygen {
+                let number = *bit >> i - 1;
+                if number % 2 == 0 {
+                    count0 += 1;
+                } else {
+                    count1 += 1;
+                }
+            }
+            if count0 > count1 {
+                while oxygen.is_empty() != true {
+                    let potential = oxygen.pop().unwrap();
+                    match (potential >> i - 1) % 2 {
+                        //if 0 store the potential correct value
+                        0 => oxygen_result.push(potential),
+                        1 => continue,
+                        _ => break,
+                    }
+                }
+            } else {
+                while oxygen.is_empty() != true {
+                    let potential = oxygen.pop().unwrap();
+                    match (potential >> i - 1) % 2 {
+                        //if 0 store the potential correct value
+                        0 => continue,
+                        1 => oxygen_result.push(potential),
+                        _ => break,
+                    }
+                }
+            }
+            oxygen = oxygen_result;
+            oxygen_result = vec![];
+            i -= 1;
+        }
+    }
+    while co2.len() > 1 {
+        //because the leading 0 throw it off I have to hard set this based on the dataset. The input.txt has 12 digit long binary so that's what it is here.
+        let mut i = 12;
+        while i > 0 {
+            let mut count0 = 0;
+            let mut count1 = 0;
+            for bit in &co2 {
+                let number = *bit >> i - 1;
+                println!("{}", number);
+                if number % 2 == 0 {
+                    count0 += 1;
+                } else {
+                    count1 += 1;
+                }
+            }
+            if count0 <= count1 {
+                while co2.is_empty() != true {
+                    let potential = co2.pop().unwrap();
+                    match (potential >> i - 1) % 2 {
+                        //if 0 store the potential correct value
+                        0 => co2_result.push(potential),
+                        1 => continue,
+                        _ => break,
+                    }
+                }
+            } else {
+                while co2.is_empty() != true {
+                    let potential = co2.pop().unwrap();
+                    match (potential >> i - 1) % 2 {
+                        //if 1 store the potential correct value
+                        0 => continue,
+                        1 => co2_result.push(potential),
+                        _ => break,
+                    }
+                }
+            }
+
+            co2 = co2_result;
+            co2_result = vec![];
+            if co2.len() == 1 {
+                break;
+            }
+            i -= 1;
+        }
+    }
+
+    let oxygen_rating = oxygen.pop().unwrap();
+    let co2_rating = co2.pop().unwrap();
+    let result: u32 = u32::from(oxygen_rating) * u32::from(co2_rating);
+    println!(
+        "o2: {:b}, co2: {:b}, result: {}",
+        oxygen_rating, co2_rating, result
+    )
+}
+
+fn main() {
+    part2();
 }
