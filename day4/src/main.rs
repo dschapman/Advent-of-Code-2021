@@ -36,10 +36,6 @@ impl BingoBoard {
             return true;
         } else if self.0[4].1 && self.0[9].1 && self.0[14].1 && self.0[19].1 && self.0[24].1 {
             return true;
-        } else if self.0[0].1 && self.0[6].1 && self.0[12].1 && self.0[18].1 && self.0[24].1 {
-            return true;
-        } else if self.0[4].1 && self.0[8].1 && self.0[12].1 && self.0[15].1 && self.0[20].1 {
-            return true;
         } else {
             return false;
         }
@@ -177,14 +173,14 @@ fn part2() {
         let mut i = 0;
         let mut winning_boards = vec![];
         while i < boards.len() {
-            boards[i].mark(num);
-            println!("Marking board: {}", i + 1);
-
+            if !winning_boards.contains(&i) {
+                boards[i].mark(num);
+                println!("Marking board: {}", i + 1);
+            }
             if boards[i].check()
                 && winning_boards.len() == boards.len() - 1
                 && !winning_boards.contains(&i)
             {
-                println!("{}", winning_boards.len());
                 result = (i, num, true);
                 break 'outer;
             } else if boards[i].check() && !winning_boards.contains(&i) {
