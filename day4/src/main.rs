@@ -169,22 +169,29 @@ fn part2() {
         ));
     }
     let mut result: (usize, u8, bool) = (0, 0, false);
+    let mut winning_boards = vec![];
     'outer: for num in numbers {
         let mut i = 0;
-        let mut winning_boards = vec![];
+        
         while i < boards.len() {
             if !winning_boards.contains(&i) {
                 boards[i].mark(num);
                 println!("Marking board: {}", i + 1);
             }
-            if boards[i].check()
-                && winning_boards.len() == boards.len() - 1
+
+            if boards[i].check() && !winning_boards.contains(&i) &&winning_boards.len() < boards.len() -1 {
+                winning_boards.push(i);
+                println!("Board {} has won.\n{:?}", i+1,winning_boards);
+                
+            }
+            else if boards[i].check()
+                && winning_boards.len() == boards.len() -1
                 && !winning_boards.contains(&i)
             {
                 result = (i, num, true);
                 break 'outer;
-            } else if boards[i].check() && !winning_boards.contains(&i) {
-                winning_boards.push(i)
+            } else if boards[i].check() && winning_boards.contains(&i) {
+                println!("Board {} has already won.", i+1)
             }
             i += 1;
         }
