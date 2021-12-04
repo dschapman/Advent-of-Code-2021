@@ -19,7 +19,7 @@ impl BingoBoard {
         if self.0[0].1 && self.0[1].1 && self.0[2].1 && self.0[3].1 && self.0[4].1 {
             return true;
         } else if self.0[5].1 && self.0[6].1 && self.0[7].1 && self.0[8].1 && self.0[9].1 {
-            return true;  
+            return true;
         } else if self.0[10].1 && self.0[11].1 && self.0[12].1 && self.0[13].1 && self.0[14].1 {
             return true;
         } else if self.0[15].1 && self.0[16].1 && self.0[17].1 && self.0[18].1 && self.0[19].1 {
@@ -41,7 +41,7 @@ impl BingoBoard {
         } else if self.0[4].1 && self.0[8].1 && self.0[12].1 && self.0[15].1 && self.0[20].1 {
             return true;
         } else {
-            return false
+            return false;
         }
     }
 }
@@ -106,35 +106,38 @@ fn part1() {
                 .collect(),
         ));
     }
-    let mut result:(usize,u8,bool) = (0,0,false);
+    let mut result: (usize, u8, bool) = (0, 0, false);
     'outer: for num in numbers {
-     let mut i = 0;
-     while i < boards.len() {
-        boards[i].mark(num);
-        if boards[i].check() {
-            result = (i,num,true);
-            break 'outer;
+        let mut i = 0;
+        while i < boards.len() {
+            boards[i].mark(num);
+            if boards[i].check() {
+                result = (i, num, true);
+                break 'outer;
+            }
+            i += 1;
         }
-        i+=1;
-     }
-       
     }
 
     /* for board in boards {
         println!("{}", board)
     } */
     if result.2 == true {
-    println!("Board {} wins at number: {}:\n{}", result.0+1, result.1,boards[result.0]);
-    let mut score:u16 = 0;
-    for square in boards[result.0].0.iter(){
-        if !square.1 {
-            score += u16::from(square.0);
+        println!(
+            "Board {} wins at number: {}:\n{}",
+            result.0 + 1,
+            result.1,
+            boards[result.0]
+        );
+        let mut score: u16 = 0;
+        for square in boards[result.0].0.iter() {
+            if !square.1 {
+                score += u16::from(square.0);
+            }
         }
+        score *= u16::from(result.1);
+        println!("Score: {}", score);
     }
-    score *= u16::from(result.1);
-    println!("Score: {}",score);
-    }
-    
 }
 
 fn part2() {
@@ -169,42 +172,45 @@ fn part2() {
                 .collect(),
         ));
     }
-    let mut result:(usize,u8,bool) = (0,0,false);
+    let mut result: (usize, u8, bool) = (0, 0, false);
     'outer: for num in numbers {
-     let mut i = 0;
-     let mut winning_boards = vec![];
-     while i < boards.len() {
-        if !winning_boards.contains(&i) {
+        let mut i = 0;
+        let mut winning_boards = vec![];
+        while i < boards.len() {
             boards[i].mark(num);
-            println!("Marking board: {}",i+1);
-        }
-        
-        if boards[i].check() && winning_boards.len() == boards.len() - 1 && !winning_boards.contains(&i)  {
-            println!("{}",winning_boards.len());
-            result = (i,num,true);
-            break 'outer;
-        } else if boards[i].check() && !winning_boards.contains(&i) {
-            winning_boards.push(i)
-        }
-        i+=1;
-     }
-       
-    }
+            println!("Marking board: {}", i + 1);
 
+            if boards[i].check()
+                && winning_boards.len() == boards.len() - 1
+                && !winning_boards.contains(&i)
+            {
+                println!("{}", winning_boards.len());
+                result = (i, num, true);
+                break 'outer;
+            } else if boards[i].check() && !winning_boards.contains(&i) {
+                winning_boards.push(i)
+            }
+            i += 1;
+        }
+    }
 
     if result.2 == true {
-    println!("Board {} wins at number: {}:\n{}", result.0+1, result.1,boards[result.0]);
-    let mut score:u16 = 0;
-    for square in boards[result.0].0.iter(){
-        if !square.1 {
-            score += u16::from(square.0);
+        println!(
+            "Board {} wins at number: {}:\n{}",
+            result.0 + 1,
+            result.1,
+            boards[result.0]
+        );
+        let mut score: u16 = 0;
+        for square in boards[result.0].0.iter() {
+            if !square.1 {
+                score += u16::from(square.0);
+            }
         }
+        println!("Sum of unmarked: {}", score);
+        score *= u16::from(result.1);
+        println!("Score: {}", score);
     }
-    println!("Sum of unmarked: {}",score);
-    score *= u16::from(result.1);
-    println!("Score: {}",score);
-    }
-    
 }
 
 fn main() {
