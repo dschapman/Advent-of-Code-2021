@@ -73,8 +73,8 @@ impl fmt::Display for BingoBoard {
         Ok(())
     }
 }
-
-fn main() {
+#[allow(dead_code)]
+fn part1() {
     let input = fs::read_to_string("input.txt").unwrap();
     let mut lines = input.lines().peekable();
     let numbers: Vec<u8> = lines
@@ -135,4 +135,78 @@ fn main() {
     println!("Score: {}",score);
     }
     
+}
+
+fn part2() {
+    let input = fs::read_to_string("input.txt").unwrap();
+    let mut lines = input.lines().peekable();
+    let numbers: Vec<u8> = lines
+        .next()
+        .unwrap()
+        .split(',')
+        .map(|n| n.to_string().parse::<u8>().unwrap())
+        .collect();
+
+    let mut boards: Vec<BingoBoard> = vec![];
+    //parse file
+    while lines.peek() != None {
+        let mut board: String = "".to_string();
+        //Assume we can read 6 lines the first one will be blank
+        lines.next();
+        board.push_str(lines.next().unwrap());
+        board.push_str(" ");
+        board.push_str(lines.next().unwrap());
+        board.push_str(" ");
+        board.push_str(lines.next().unwrap());
+        board.push_str(" ");
+        board.push_str(lines.next().unwrap());
+        board.push_str(" ");
+        board.push_str(lines.next().unwrap());
+        boards.push(BingoBoard(
+            board
+                .split_whitespace()
+                .map(|square| BingoSquare(square.parse::<u8>().unwrap(), false))
+                .collect(),
+        ));
+    }
+    let mut result:(usize,u8,bool) = (0,0,false);
+    'outer: for num in numbers {
+     let mut i = 0;
+     let mut winning_boards = vec![];
+     while i < boards.len() {
+        if !winning_boards.contains(&i) {
+            boards[i].mark(num);
+            println!("Marking board: {}",i+1);
+        }
+        
+        if boards[i].check() && winning_boards.len() == boards.len() - 1 && !winning_boards.contains(&i)  {
+            println!("{}",winning_boards.len());
+            result = (i,num,true);
+            break 'outer;
+        } else if boards[i].check() && !winning_boards.contains(&i) {
+            winning_boards.push(i)
+        }
+        i+=1;
+     }
+       
+    }
+
+
+    if result.2 == true {
+    println!("Board {} wins at number: {}:\n{}", result.0+1, result.1,boards[result.0]);
+    let mut score:u16 = 0;
+    for square in boards[result.0].0.iter(){
+        if !square.1 {
+            score += u16::from(square.0);
+        }
+    }
+    println!("Sum of unmarked: {}",score);
+    score *= u16::from(result.1);
+    println!("Score: {}",score);
+    }
+    
+}
+
+fn main() {
+    part2();
 }
