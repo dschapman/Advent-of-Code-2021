@@ -47,34 +47,32 @@ fn main() {
                 } 
             }
         } else {
-            if x1 > x2 && y2 > y1{
+            if x1 > x2 {
                 while x1 >= x2 && y2 >=y1 {
-                    grid[y1 as usize][x2 as usize] += 1;
+                    grid[y2 as usize][x2 as usize] += 1;
                     println!("Marking {},{}",x2,y1);
-                    x2+=1;
+                    x1-=1;
                     y1+=1;
                 }
-            } else if x1 > x2 && y1 > y2 {
-                while x1 >= x2 && y1 >=y2 {
+                while x1 >= x2 && y1 >= y2 {
                     grid[y2 as usize][x2 as usize] += 1;
                     println!("Marking {},{}",x2,y2);
-                    x2+=1;
-                    y2+=1;
+                    x1-=1;
+                    y1-=1; 
                 }
-            } else if x2 > x1 && y2 > y1 {
+            } else if x2 > x1  {
                 while x2 >= x1 && y2 >=y1 {
                     grid[y1 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x1,y1);
                     x1+=1;
                     y1+=1;
                 }
-            } else {
                 while x2 >= x1 && y1 >=y2 {
                     grid[y2 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x1,y2);
                     x1+=1;
-                    y2+=1;
-                } 
+                    y1-=1;
+                }
             }
             
         }
