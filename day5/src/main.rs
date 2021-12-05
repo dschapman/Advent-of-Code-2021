@@ -1,8 +1,12 @@
 use std::fs;
+use dhat::{Dhat, DhatAlloc};
+#[global_allocator]
+static ALLOCATOR: DhatAlloc = DhatAlloc;
 
 
 
 fn main() {
+    let _dhat = Dhat::start_heap_profiling();
     let input = fs::read_to_string("input.txt").unwrap();
     let mut grid = vec![vec![0u8; 1000]; 1000];
     let lines = input.lines();
