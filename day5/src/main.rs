@@ -4,7 +4,7 @@ use std::fs;
 
 fn main() {
     let input = fs::read_to_string("input.txt").unwrap();
-    let mut grid = vec![vec![0u8; 10]; 10];
+    let mut grid = vec![vec![0u8; 1000]; 1000];
     let lines = input.lines();
     for line in lines {
         let mut word = line.split_whitespace();
@@ -48,27 +48,27 @@ fn main() {
             }
         } else {
             if x1 > x2 {
-                while x1 >= x2 && y2 >=y1 {
-                    grid[y2 as usize][x2 as usize] += 1;
+                while x1 > x2 && y2 > y1 {
+                    grid[y1 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x2,y1);
                     x1-=1;
                     y1+=1;
                 }
-                while x1 >= x2 && y1 >= y2 {
-                    grid[y2 as usize][x2 as usize] += 1;
+                while x1 > x2 && y1 > y2 {
+                    grid[y1 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x2,y2);
                     x1-=1;
                     y1-=1; 
                 }
             } else if x2 > x1  {
-                while x2 >= x1 && y2 >=y1 {
+                while x2 > x1 && y2 > y1 {
                     grid[y1 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x1,y1);
                     x1+=1;
                     y1+=1;
                 }
-                while x2 >= x1 && y1 >=y2 {
-                    grid[y2 as usize][x1 as usize] += 1;
+                while x2 > x1 && y1 > y2 {
+                    grid[y1 as usize][x1 as usize] += 1;
                     println!("Marking {},{}",x1,y2);
                     x1+=1;
                     y1-=1;
