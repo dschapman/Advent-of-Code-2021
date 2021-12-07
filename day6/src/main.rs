@@ -1,3 +1,7 @@
+use std::fs;
+
 fn main() {
-    println!("Hello, world!");
+    let input = fs::read_to_string("input.txt").unwrap();
+    let fish = input.split(",");
+    println!("{:?}", fish)
 }
