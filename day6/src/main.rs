@@ -2,23 +2,35 @@ use std::fs;
 
 fn main() {
     let input = fs::read_to_string("input.txt").unwrap().replace("\n", "");
-    let mut school_of_lantern_fish: Vec<u8> = input
+    let mut school: Vec<usize> = vec![0, 0, 0, 0, 0, 0, 0, 0, 0];
+    input
         .split(",")
-        .map(|item| item.parse::<u8>().unwrap())
-        .collect();
+        .for_each(|item| school[item.parse::<usize>().unwrap()] += 1);
     let mut day = 0;
     while day < 256 {
-        let mut new_school: Vec<u8> = vec![];
-        for fish in school_of_lantern_fish.iter_mut() {
-            if *fish == 0 {
-                *fish = 6;
-                new_school.push(8);
+        let mut i = 0;
+        let mut stage6 = 0;
+        let mut stage8 = 0;
+        while i < 9 {
+            if i == 0 {
+                if school[i] > 0 {
+                    stage6 += school[i];
+                    stage8 += school[i];
+                    school[i] -= school[i];
+                }
             } else {
-                *fish -= 1;
+                if school[i] > 0 {
+                    school[i - 1] += school[i];
+                    school[i] -= school[i];
+                }
             }
+            i += 1;
         }
-        school_of_lantern_fish.append(&mut new_school);
+        school[6] += stage6;
+        school[8] += stage8;
         day += 1;
     }
-    println!("{}", school_of_lantern_fish.len())
+    println!("{:?}", school);
+    let sum: usize = school.iter().sum();
+    println!("{}", sum)
 }
