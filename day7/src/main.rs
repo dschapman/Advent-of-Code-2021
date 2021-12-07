@@ -13,10 +13,28 @@ fn main() {
         sum_of_squares += (crab as f64 - mean).abs().powi(2)
     }
     let std_dev = (sum_of_squares / number_of_crabs as f64).sqrt();
-    let new_mean = crabs
+    let trimmed_crabs: Vec<u32> = crabs
         .clone()
-        .iter()
-        .filter(|crab| crab as f64 < mean + std_dev && crab as f64 > mean - std_dev)
-        .sum();
-    println!("mean:{} standad deviation: {}", mean, std_dev);
+        .into_iter()
+        .filter(|crab| (f64::from(*crab) < mean + std_dev && f64::from(*crab) > mean - std_dev))
+        .collect();
+    let trimmed_mean = trimmed_crabs.iter().sum::<u32>() as f64 / trimmed_crabs.len() as f64;
+    println!(
+        "mean:{} standard deviation: {} trimmed_mean: {}",
+        mean, std_dev, trimmed_mean
+    );
+    let mut i = -15;
+    while i < 15 {
+        let mut fuel = 0;
+        for crab in crabs.clone() {
+            fuel += (crab as i64 - trimmed_mean.round() as i64 + i as i64).abs();
+        }
+        println!(
+            "Pos: {}, Total Fuel Used: {}",
+            trimmed_mean.round() + i as f64,
+            fuel
+        );
+
+        i += 1;
+    }
 }
