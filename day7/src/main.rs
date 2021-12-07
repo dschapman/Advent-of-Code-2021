@@ -13,6 +13,10 @@ fn main() {
         sum_of_squares += (crab as f64 - mean).abs().powi(2)
     }
     let std_dev = (sum_of_squares / number_of_crabs as f64).sqrt();
-    let new_mean = crabs.clone().iter().filter(|crab|crab < )
-        println!("mean:{} standad deviation: {}", mean, std_dev);
+    let new_mean = crabs
+        .clone()
+        .iter()
+        .filter(|crab| crab as f64 < mean + std_dev && crab as f64 > mean - std_dev)
+        .sum();
+    println!("mean:{} standad deviation: {}", mean, std_dev);
 }
