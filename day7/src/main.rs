@@ -1,23 +1,18 @@
-use std::collections::HashMap;
 use std::fs;
 
 fn main() {
     let input = fs::read_to_string("input.txt").unwrap().replace("\n", "");
-    let crabs: Vec<u16> = input
+    let crabs: Vec<u32> = input
         .split(",")
-        .map(|item| item.parse::<u16>().unwrap())
+        .map(|item| item.parse::<u32>().unwrap())
         .collect();
-    let mean: f32 = crabs.iter().sum::<u16>() as f32 / crabs.len() as f32;
-    let frequencies = crabs.iter().fold(HashMap::new(), |mut freqs, value| {
-        *freqs.entry(value).or_insert(0) += 1;
-        freqs
-    });
-
-    let mode = frequencies
-        .into_iter()
-        .max_by_key(|&(_, count)| count)
-        .map(|(value, _)| *value)
-        .unwrap();
-
-    println!("mean:{} mode: {}", mean, mode);
+    let number_of_crabs = crabs.len();
+    let mean: f64 = crabs.iter().sum::<u32>() as f64 / crabs.len() as f64;
+    let mut sum_of_squares: f64 = 0.0;
+    for crab in crabs.clone() {
+        sum_of_squares += (crab as f64 - mean).abs().powi(2)
+    }
+    let std_dev = (sum_of_squares / number_of_crabs as f64).sqrt();
+    let new_mean = crabs.clone().iter().filter(|crab|crab < )
+        println!("mean:{} standad deviation: {}", mean, std_dev);
 }
