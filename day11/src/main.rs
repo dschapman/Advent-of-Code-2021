@@ -5,7 +5,7 @@ use std::fs;
 #[derive(Debug)]
 struct OctoGrid(Vec<Vec<u32>>);
 
-impl fn()
+impl OctoGrid {}
 
 impl fmt::Display for OctoGrid {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
