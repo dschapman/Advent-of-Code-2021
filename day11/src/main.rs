@@ -127,12 +127,15 @@ fn main() {
     let mut octo_grid: OctoGrid = OctoGrid(input, vec![], 0);
     println!("{}", octo_grid);
     let mut i = 0;
-    while i < number_of_steps {
+    loop {
         print!("{}[2J", 27 as char);
         octo_grid.step();
         println!("Step {}:\n{}", i + 1, octo_grid);
         i += 1;
-        if octo_grid.0 == Vec<Vec<u32;0>>
+        if octo_grid.0 == vec![vec![0; 10]; 10] {
+            println!("They synchronize at step {}", i);
+            break;
+        }
     }
 
     println!("There were {} flashes", octo_grid.2);
