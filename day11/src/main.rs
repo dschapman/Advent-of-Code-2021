@@ -86,8 +86,9 @@ impl fmt::Display for OctoGrid {
             for j in 0..10 {
                 if self.0[i][j] == 0 {
                     write!(f, "{}", Style::new().bold().paint(self.0[i][j].to_string()))?;
+                } else {
+                    write!(f, "{}", self.0[i][j])?
                 }
-                write!(f, "{}", self.0[i][j])?
             }
             write!(f, "\n")?;
         }
@@ -109,7 +110,6 @@ fn main() {
     let mut octo_grid: OctoGrid = OctoGrid(input, vec![], 0);
     println!("{}", octo_grid);
     let mut i = 0;
-    println!("Pre: \n, {}", octo_grid);
     while i < number_of_steps {
         print!("{}[2J", 27 as char);
         octo_grid.step();
