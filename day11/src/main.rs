@@ -27,9 +27,11 @@ impl OctoGrid {
 
     fn flash(&mut self, i: usize, j: usize) {
         self.1.push((i, j));
+        self.0[i][j] = 0;
         if i > 0 {
-            self.0[i][j] =
+            self.0[i - 1][j] += 1;
         }
+        if i
     }
 }
 
