@@ -3,7 +3,7 @@ use std::fmt;
 use std::fs;
 
 #[derive(Debug)]
-struct OctoGrid(Vec<Vec<u32>>, Vec<(usize, usize)>);
+struct OctoGrid(Vec<Vec<u32>>, Vec<(usize, usize)>, u128);
 
 impl OctoGrid {
     fn step(&mut self) {
@@ -25,6 +25,7 @@ impl OctoGrid {
 
     fn flash(&mut self, i: usize, j: usize) {
         if !self.1.contains(&(i, j)) {
+            self.2 += 1;
             self.1.push((i, j));
             self.0[i][j] = 0;
             if i > 0 {
@@ -94,7 +95,7 @@ impl fmt::Display for OctoGrid {
     }
 }
 fn main() {
-    let _number_of_steps = 100;
+    let number_of_steps = 100;
 
     let input: Vec<Vec<u32>> = fs::read_to_string("input.txt")
         .unwrap()
@@ -105,7 +106,7 @@ fn main() {
                 .collect()
         })
         .collect();
-    let mut octo_grid: OctoGrid = OctoGrid(input, vec![]);
+    let mut octo_grid: OctoGrid = OctoGrid(input, vec![], 0);
     println!("{}", octo_grid);
     octo_grid.step();
 
