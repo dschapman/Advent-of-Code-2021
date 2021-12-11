@@ -67,7 +67,13 @@ impl OctoGrid {
         if j > 0 {
             self.0[i][j - 1] += 1;
             if self.0[i][j - 1] == 9 {
-                self.flash()
+                self.flash(i, j - 1)
+            }
+        }
+        if j < 9 {
+            self.0[i][j + 1] += 1;
+            if self.0[i][j + 1] == 9 {
+                self.flash(i, j + 1)
             }
         }
     }
@@ -99,6 +105,9 @@ fn main() {
                 .collect()
         })
         .collect();
-    let octo_grid: OctoGrid = OctoGrid(input, vec![]);
-    println!("{}", octo_grid)
+    let mut octo_grid: OctoGrid = OctoGrid(input, vec![]);
+    println!("{}", octo_grid);
+    octo_grid.step();
+
+    println!("{}", octo_grid);
 }
