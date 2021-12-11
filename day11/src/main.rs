@@ -29,7 +29,10 @@ impl OctoGrid {
             self.1.push((i, j));
             self.0[i][j] = 0;
             if i > 0 {
-                self.0[i - 1][j] += 1;
+                if self.1.contains((i - 1, j)) {
+                    self.0[i - 1][j] += 1;
+                }
+
                 if self.0[i - 1][j] > 9 {
                     self.flash(i - 1, j)
                 }
