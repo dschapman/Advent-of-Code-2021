@@ -1,5 +1,7 @@
 use std::fs;
 
+struct OctoGrid(Vec<Vec<32>>)
+
 fn main() {
     let _number_of_steps = 100;
 
@@ -12,5 +14,5 @@ fn main() {
                 .collect()
         })
         .collect();
-    println!("{}", input)
+    println!("{:?}", input)
 }
