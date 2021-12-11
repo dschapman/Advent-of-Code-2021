@@ -41,38 +41,38 @@ impl OctoGrid {
                 }
                 if j < 9 {
                     self.0[i - 1][j + 1] += 1;
-                    if self.0[i - 1][j + 1] == 9 {
+                    if self.0[i - 1][j + 1] > 9 {
                         self.flash(i - 1, j + 1)
                     }
                 }
             }
             if i < 9 {
                 self.0[i + 1][j] += 1;
-                if self.0[i + 1][j] == 9 {
+                if self.0[i + 1][j] > 9 {
                     self.flash(i + 1, j)
                 }
                 if j > 0 {
                     self.0[i + 1][j - 1] += 1;
-                    if self.0[i + 1][j - 1] == 9 {
+                    if self.0[i + 1][j - 1] > 9 {
                         self.flash(i + 1, j - 1)
                     }
                 }
                 if j < 9 {
                     self.0[i + 1][j + 1] += 1;
-                    if self.0[i + 1][j + 1] == 9 {
+                    if self.0[i + 1][j + 1] > 9 {
                         self.flash(i + 1, j + 1)
                     }
                 }
             }
             if j > 0 {
                 self.0[i][j - 1] += 1;
-                if self.0[i][j - 1] == 9 {
+                if self.0[i][j - 1] > 9 {
                     self.flash(i, j - 1)
                 }
             }
             if j < 9 {
                 self.0[i][j + 1] += 1;
-                if self.0[i][j + 1] == 9 {
+                if self.0[i][j + 1] > 9 {
                     self.flash(i, j + 1)
                 }
             }
@@ -95,7 +95,7 @@ impl fmt::Display for OctoGrid {
     }
 }
 fn main() {
-    let number_of_steps = 2;
+    let number_of_steps = 100;
 
     let input: Vec<Vec<u32>> = fs::read_to_string("input.txt")
         .unwrap()
