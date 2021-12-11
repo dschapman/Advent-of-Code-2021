@@ -15,14 +15,19 @@ impl OctoGrid {
 
         for i in 0..10 {
             for j in 0..10 {
-                if self.0[i][j] == 9 {}
+                if self.0[i][j] == 9 {
+                    flash(i, j)
+                }
             }
         }
         self.1 = vec![]
     }
 
     fn flash(&mut self, i: usize, j: usize) {
-        self.1.push((i, j);
+        self.1.push((i, j));
+        if i > 0 {
+            self.0[i][j]
+        }
     }
 }
 
