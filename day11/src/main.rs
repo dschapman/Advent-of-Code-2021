@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    let number_of_steps = 0;
 }
