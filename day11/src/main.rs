@@ -10,6 +10,7 @@ impl fmt::Display for OctoGrid {
             for j in 0..10 {
                 write!(f, "{}", self.0[i][j])?
             }
+            write!(f, "\n")?;
         }
         Ok(())
     }
@@ -27,5 +28,5 @@ fn main() {
         })
         .collect();
     let octo_grid: OctoGrid = OctoGrid(input);
-    println!("{:?}", octo_grid)
+    println!("{}", octo_grid)
 }
