@@ -30,8 +30,11 @@ impl OctoGrid {
         self.0[i][j] = 0;
         if i > 0 {
             self.0[i - 1][j] += 1;
+            if self.0
         }
-        if i
+        if i < 9 {
+            self.0[i + 1][j] += 1;
+        }
     }
 }
 
