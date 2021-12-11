@@ -108,7 +108,10 @@ fn main() {
         .collect();
     let mut octo_grid: OctoGrid = OctoGrid(input, vec![], 0);
     println!("{}", octo_grid);
-    octo_grid.step();
+    let mut i = 0;
+    while i < number_of_steps {
+        i += 1;
+    }
 
-    println!("{}", octo_grid);
+    println!("There were {} flashes", octo_grid.3);
 }
