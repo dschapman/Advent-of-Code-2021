@@ -132,6 +132,7 @@ fn main() {
         octo_grid.step();
         println!("Step {}:\n{}", i + 1, octo_grid);
         i += 1;
+        if octo_grid.0 == Vec<Vec<u32;0>>
     }
 
     println!("There were {} flashes", octo_grid.2);
