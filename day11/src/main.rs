@@ -5,7 +5,13 @@ use std::fs;
 #[derive(Debug)]
 struct OctoGrid(Vec<Vec<u32>>);
 
-impl OctoGrid {}
+impl OctoGrid {
+    fn step(&self) {
+        for i in 0..10 {
+            for j in 0..10 {}
+        }
+    }
+}
 
 impl fmt::Display for OctoGrid {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
