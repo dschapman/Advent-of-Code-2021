@@ -15,10 +15,12 @@ impl OctoGrid {
 
         for i in 0..10 {
             for j in 0..10 {
-                if()
+                if self.0[i][j] == 9 {}
             }
         }
     }
+
+    fn flash(i: usize, j: usize) {}
 }
 
 impl fmt::Display for OctoGrid {
