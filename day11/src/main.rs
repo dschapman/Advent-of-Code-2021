@@ -16,7 +16,9 @@ impl OctoGrid {
         for i in 0..10 {
             for j in 0..10 {
                 if self.0[i][j] == 9 {
-                    self.flash(i, j);
+                    if !self.1.contains(&(i, j)) {
+                        self.flash(i, j);
+                    }
                 }
             }
         }
@@ -26,7 +28,7 @@ impl OctoGrid {
     fn flash(&mut self, i: usize, j: usize) {
         self.1.push((i, j));
         if i > 0 {
-            self.0[i][j]
+            self.0[i][j] =
         }
     }
 }
