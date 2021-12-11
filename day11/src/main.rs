@@ -112,7 +112,7 @@ fn main() {
     while i < number_of_steps {
         print!("{}[2J", 27 as char);
         octo_grid.step();
-        println!("{}", octo_grid);
+        println!("Step {}:\n{}", i + 1, octo_grid);
         i += 1;
     }
 
