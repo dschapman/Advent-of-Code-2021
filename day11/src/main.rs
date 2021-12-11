@@ -6,9 +6,11 @@ use std::fs;
 struct OctoGrid(Vec<Vec<u32>>);
 
 impl OctoGrid {
-    fn step(&self) {
+    fn step(&mut self) {
         for i in 0..10 {
-            for j in 0..10 {}
+            for j in 0..10 {
+                self.0[i][j] += 1;
+            }
         }
     }
 }
