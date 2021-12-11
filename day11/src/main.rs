@@ -1,9 +1,9 @@
 use std::fs;
 
 fn main() {
-    let number_of_steps = 100;
+    let _number_of_steps = 100;
 
-    let input: Vec<Vec<u8>> = fs::read_to_string("input.txt")
+    let input: Vec<Vec<u32>> = fs::read_to_string("input.txt")
         .unwrap()
         .lines()
         .map(|line| {
@@ -12,4 +12,5 @@ fn main() {
                 .collect()
         })
         .collect();
+    println!("{}", input)
 }
