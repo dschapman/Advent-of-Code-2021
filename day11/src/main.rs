@@ -15,8 +15,8 @@ impl OctoGrid {
 
         for i in 0..10 {
             for j in 0..10 {
-                if self.0[i][j] == 9 {
-                    if !self.1.contains(&(i, j)) {
+                if self.0[i][j] > 9 {
+
                         self.flash(i, j);
                     }
                 }
@@ -30,12 +30,12 @@ impl OctoGrid {
         self.0[i][j] = 0;
         if i > 0 {
             self.0[i - 1][j] += 1;
-            if self.0[i - 1][j] == 9 {
+            if self.0[i - 1][j] > 9 {
                 self.flash(i - 1, j)
             }
             if j > 0 {
                 self.0[i - 1][j - 1] += 1;
-                if self.0[i - 1][j - 1] == 9 {
+                if self.0[i - 1][j - 1] > 9 {
                     self.flash(i - 1, j - 1)
                 }
             }
