@@ -1,3 +1,4 @@
+use ansi_term::Style;
 use std::fmt;
 use std::fs;
 
