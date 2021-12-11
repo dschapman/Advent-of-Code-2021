@@ -1,6 +1,9 @@
 use std::fs;
 
+#[derive(Debug)]
 struct OctoGrid(Vec<Vec<u32>>);
+
+impl Display() for OctoGrid {}
 
 fn main() {
     let _number_of_steps = 100;
@@ -14,6 +17,6 @@ fn main() {
                 .collect()
         })
         .collect();
-    let mut octo_grid: OctoGrid;
-    println!("{:?}", input)
+    let octo_grid: OctoGrid = OctoGrid(input);
+    println!("{:?}", octo_grid)
 }
