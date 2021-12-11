@@ -21,7 +21,9 @@ impl OctoGrid {
         self.1 = vec![]
     }
 
-    fn flash(&mut self.1, i: usize, j: usize) {}
+    fn flash(&mut self, i: usize, j: usize) {
+        self.1.push((i, j);
+    }
 }
 
 impl fmt::Display for OctoGrid {
