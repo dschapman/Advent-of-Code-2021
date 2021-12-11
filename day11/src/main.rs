@@ -109,6 +109,7 @@ fn main() {
     let mut octo_grid: OctoGrid = OctoGrid(input, vec![], 0);
     println!("{}", octo_grid);
     let mut i = 0;
+    println!("Pre: \n, {}", octo_grid);
     while i < number_of_steps {
         print!("{}[2J", 27 as char);
         octo_grid.step();
