@@ -8,6 +8,9 @@ impl fmt::Display for OctoGrid {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         for i in 0..10 {
             for j in 0..10 {
+                if self.0[i][j] == 0 {
+                    write!(f, "{}".self.0[i][j])
+                }
                 write!(f, "{}", self.0[i][j])?
             }
             write!(f, "\n")?;
