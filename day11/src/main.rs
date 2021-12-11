@@ -110,8 +110,11 @@ fn main() {
     println!("{}", octo_grid);
     let mut i = 0;
     while i < number_of_steps {
+        print!("{}[2J", 27 as char);
+        octo_grid.step();
+        println!("{}", octo_grid);
         i += 1;
     }
 
-    println!("There were {} flashes", octo_grid.3);
+    println!("There were {} flashes", octo_grid.2);
 }
