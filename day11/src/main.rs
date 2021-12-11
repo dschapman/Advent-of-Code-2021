@@ -1,10 +1,25 @@
+use std::fmt;
 use std::fs;
 
 #[derive(Debug)]
 struct OctoGrid(Vec<Vec<u32>>);
 
-impl Display() for OctoGrid {}
-
+impl fmt::Display for OctoGrid {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut i = 0;
+        for x in &self.0 {
+            if i > 4 {
+                i = 0;
+                write!(f, "\n {} ", x)?;
+                i += 1;
+            } else {
+                write!(f, " {} ", x)?;
+                i += 1;
+            }
+        }
+        Ok(())
+    }
+}
 fn main() {
     let _number_of_steps = 100;
 
