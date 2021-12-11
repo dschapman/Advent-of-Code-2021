@@ -40,9 +40,9 @@ impl OctoGrid {
                 }
             }
             if j < 9 {
-                self.0[i - 1][j - 1] += 1;
-                if self.0[i - 1][j - 1] == 9 {
-                    self.flash(i - 1, j - 1)
+                self.0[i - 1][j + 1] += 1;
+                if self.0[i - 1][j + 1] == 9 {
+                    self.flash(i - 1, j + 1)
                 }
             }
         }
@@ -50,6 +50,18 @@ impl OctoGrid {
             self.0[i + 1][j] += 1;
             if self.0[i + 1][j] == 9 {
                 self.flash(i + 1, j)
+            }
+            if j > 0 {
+                self.0[i + 1][j - 1] += 1;
+                if self.0[i + 1][j - 1] == 9 {
+                    self.flash(i + 1, j - 1)
+                }
+            }
+            if j < 9 {
+                self.0[i - 1][j + 1] += 1;
+                if self.0[i - 1][j + 1] == 9 {
+                    self.flash(i - 1, j + 1)
+                }
             }
         }
     }
