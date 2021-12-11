@@ -6,5 +6,5 @@ fn main() {
     let input = fs::read_to_string("input.txt")
         .unwrap()
         .lines()
-        .map(|line| line.chars().map(|number| number.parse::<u8>()));
+        .map(|line| line.chars().map(|number| char::to_digit(number));
 }
