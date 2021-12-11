@@ -3,7 +3,7 @@ use std::fmt;
 use std::fs;
 
 #[derive(Debug)]
-struct OctoGrid(Vec<Vec<u32>>);
+struct OctoGrid(Vec<Vec<u32>>, Vec<(usize, usize)>);
 
 impl OctoGrid {
     fn step(&mut self) {
@@ -18,9 +18,10 @@ impl OctoGrid {
                 if self.0[i][j] == 9 {}
             }
         }
+        self.1 = vec![]
     }
 
-    fn flash(i: usize, j: usize) {}
+    fn flash(&mut self.1, i: usize, j: usize) {}
 }
 
 impl fmt::Display for OctoGrid {
@@ -49,6 +50,6 @@ fn main() {
                 .collect()
         })
         .collect();
-    let octo_grid: OctoGrid = OctoGrid(input);
+    let octo_grid: OctoGrid = OctoGrid(input, vec![]);
     println!("{}", octo_grid)
 }
